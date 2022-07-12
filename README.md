@@ -9,6 +9,8 @@ log function list:
 load / loadstring
 autoAssemble
 decodeFunction
+shellExecute
+createProcess
 ```
 
 will move to gist if there is many ce things..
