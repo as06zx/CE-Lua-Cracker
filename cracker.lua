@@ -1,3 +1,5 @@
+local opcodes = require "opcodes"
+
 local function bpLoad()
    local length = readInteger(RAX+0x10)
    local data   = readString(RAX+0x20, length)
@@ -28,26 +30,23 @@ local function bpCreate()
    printf("createProcess -> %s", data)
 end
 
-local function bpOp()
+local function bpOpcode()
    local data   = RAX
-   printf("Op: %s", data)
+   printf("Opcode -> %s", opcodes[data])
 end
 
 local function bpOpEQ()
    local data   = RAX
-   RAX = 1 -- set it to true, remove if no want
-   printf("OpEQ set to true, was %s", data)
+   RAX = 1 -- set it to true, remove if no want // bug here
+   printf("[OpEQ] -> %s", data)
 end
 
 debugProcess()
-
--- * out * --
 debug_setBreakpoint("lua53-64.luaL_checkversion_+1906", bpLoad)
 debug_setBreakpoint("cheatengine-x86_64-SSE4-AVX2.exe+264DBA", bpAsm)
 debug_setBreakpoint("cheatengine-x86_64-SSE4-AVX2.exe+27F585", bpDecode)
 debug_setBreakpoint("cheatengine-x86_64-SSE4-AVX2.exe+272B56", bpShell)
 debug_setBreakpoint("cheatengine-x86_64-SSE4-AVX2.exe+2682CD", bpCreate)
 
--- * in * --
-debug_setBreakpoint("lua53-64.dll+31902", bpOp)
+debug_setBreakpoint("lua53-64.dll+31902", bpOpcode)
 debug_setBreakpoint("lua53-64.dll+32955", bpOpEQ)
