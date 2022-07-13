@@ -19,3 +19,8 @@ decodeFunction
 shellExecute
 createProcess
 ```
+
+known bugs:
+```
+print got error when ????, i think because modify eq val
+```
