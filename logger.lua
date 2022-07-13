@@ -28,16 +28,26 @@ local function bpCreate()
    printf("createProcess -> %s", data)
 end
 
-local function bpLuaL()
-   local data = readString(RDX, 6000)
-   data = data:sub(0,#data-2)
-   printf("lual_loadstring -> %s", data)
+local function bpOp()
+   local data   = RAX
+   printf("Op: %s", data)
+end
+
+local function bpOpEQ()
+   local data   = RAX
+   RAX = 1 -- set it to true, remove if no want
+   printf("OpEQ set to true, was %s", data)
 end
 
 debugProcess()
+
+-- * out * --
 debug_setBreakpoint("lua53-64.luaL_checkversion_+1906", bpLoad)
 debug_setBreakpoint("cheatengine-x86_64-SSE4-AVX2.exe+264DBA", bpAsm)
 debug_setBreakpoint("cheatengine-x86_64-SSE4-AVX2.exe+27F585", bpDecode)
 debug_setBreakpoint("cheatengine-x86_64-SSE4-AVX2.exe+272B56", bpShell)
 debug_setBreakpoint("cheatengine-x86_64-SSE4-AVX2.exe+2682CD", bpCreate)
-debug_setBreakpoint("lua53-64.luaL_loadstring+13", bpLuaL)
+
+-- * in * --
+debug_setBreakpoint("lua53-64.dll+31902", bpOp)
+debug_setBreakpoint("lua53-64.dll+32955", bpOpEQ)
