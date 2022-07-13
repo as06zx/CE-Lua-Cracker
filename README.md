@@ -11,6 +11,7 @@ autoAssemble
 decodeFunction
 shellExecute
 createProcess
+lual_loadstring
 ```
 
 will move to gist if there is many ce things..
