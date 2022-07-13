@@ -2,7 +2,11 @@ local opcodes = require "opcodes"
 
 local function bpLoad()
    local length = readInteger(RAX+0x10)
-   local data   = readString(RAX+0x20, length)
+   local addr   = RAX+0x20
+   local data = ""
+   for i=0, length-1 do
+      data = data .. string.char(readByte(addr+i))
+   end
    printf("load -> %s", data)
 end
 
