@@ -36,9 +36,17 @@ local function bpOpcode()
 end
 
 local function bpOpEQ()
-   local data   = RAX
-   RAX = 1 -- set it to true, remove if no want // bug here
-   printf("[OpEQ] -> %s", data)
+   local lua = RCX
+   local val1 = readQword(RDX)
+   local val2 = readQword(R8)
+   local result = val1 == val2
+   printf("[EQ] -> %s == %s (%s)", val1, val2, result)
+end
+
+local function bpOpGetTabUp()
+   local p = readPointer(R8)
+   local data = readString(p+0x20, 6000)
+   printf("[GETTABUP] -> %s", data)
 end
 
 debugProcess()
@@ -48,5 +56,7 @@ debug_setBreakpoint("cheatengine-x86_64-SSE4-AVX2.exe+27F585", bpDecode)
 debug_setBreakpoint("cheatengine-x86_64-SSE4-AVX2.exe+272B56", bpShell)
 debug_setBreakpoint("cheatengine-x86_64-SSE4-AVX2.exe+2682CD", bpCreate)
 
+
 debug_setBreakpoint("lua53-64.dll+31902", bpOpcode)
-debug_setBreakpoint("lua53-64.dll+32955", bpOpEQ)
+debug_setBreakpoint("lua53-64.dll+3294C", bpOpEQ)
+debug_setBreakpoint("lua53-64.dll+319DD", bpOpGetTabUp)
