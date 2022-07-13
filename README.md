@@ -9,6 +9,7 @@ print executed opcode
 print executed data/script
 log some lua functions (listed below)
 print/modify opEQ result
+print opGETTABUP name
 ```
 
 functions:
