@@ -43,7 +43,6 @@ end
 
 local function bp_OpLOADK()
    local p        = R10+RAX*8
-   print( readInteger(p+8))
    local dataType = types[readInteger(p+8)]
    local data
    -- i will move method to get data/type later!
