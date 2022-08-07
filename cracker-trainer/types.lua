@@ -24,6 +24,7 @@ local t={
 
 --- i dont know but memory teached me ---
 [68] = "STRING2",
+[84] = "LNGSTR2",
 }
 
 return t
