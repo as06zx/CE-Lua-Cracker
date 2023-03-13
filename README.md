@@ -1,4 +1,4 @@
-# CE-Lua-Cracker
+# CE-Lua-Cracker ( for 7.4 )
 
 it place breakpoint and control data.
 cheatengine-x86_64-SSE4-AVX2.exe only.
